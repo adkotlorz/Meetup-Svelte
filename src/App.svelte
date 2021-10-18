@@ -1,9 +1,8 @@
 <script>
-
+    import Header from "./components/UI/Header.svelte";
 </script>
 
-<style>
+<Header/>
 
-</style>
 
-<h1>Project</h1>
+
