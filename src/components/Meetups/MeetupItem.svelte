@@ -6,7 +6,7 @@
     export let imageUrl;
     export let description;
     export let address;
-    export let email;
+    export let email = null;
 </script>
 
 <style>
@@ -60,6 +60,10 @@
 
     div {
         text-align: right;
+    }
+
+    .content {
+        height: 4rem;
     }
 </style>
 
