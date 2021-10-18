@@ -20,6 +20,7 @@
             imageUrl: "https://images.unsplash.com/photo-1528901166007-3784c7dd3653?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80",
             address: "35 Nerd Road, 35032 Los Angeles",
             email: "code@test.com",
+            isFavorite: false,
         },
         {
             id: "m2",
@@ -29,6 +30,7 @@
             imageUrl: "https://images.unsplash.com/photo-1519315901367-f34ff9154487?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80",
             address: "35 Nerd Road, 35032 Los Angeles",
             email: "swim@test.com",
+            isFavorite: false,
         },
     ];
 
@@ -44,6 +46,16 @@
         };
 
         meetups = [newMeetup, ...meetups];
+    };
+
+    const toggleFavorite = (e) => {
+        const id = e.detail;
+        const updatedMeetup = {...meetups.find(m => m.id === id)};
+        updatedMeetup.isFavorite = !updatedMeetup.isFavorite;
+        const meetupIndex = meetups.findIndex(m => m.id === id);
+        const updatedMeetups = [...meetups];
+        updatedMeetups[meetupIndex] = updatedMeetup;
+        meetups = updatedMeetups;
     };
 </script>
 
@@ -97,7 +109,7 @@
                 on:input={e => (description = e.target.value)}/>
         <Button type="submit" caption="Save"/>
     </form>
-    <MeetupGrid {meetups}/>
+    <MeetupGrid {meetups} on:togglefavorite={toggleFavorite}/>
 </main>
 
 
