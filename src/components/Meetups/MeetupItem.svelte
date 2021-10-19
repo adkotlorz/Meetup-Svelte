@@ -97,7 +97,6 @@
     </div>
     <footer>
         <Button href="mailto{email}">Contact</Button>
-        <Button type="button" on:click={() => dispatch('showdetails', id)}>Show details</Button>
         <Button
                 type="button"
                 mode="outline"
@@ -105,5 +104,7 @@
                 on:click={toggleFavorite}>
             {isFavorite ? 'Unfavored' : 'Favorite'}
         </Button>
+        <Button type="button" on:click={() => dispatch('showdetails', id)}>Show details</Button>
+
     </footer>
 </article>

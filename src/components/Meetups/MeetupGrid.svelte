@@ -1,5 +1,6 @@
 <script>
     import MeetupItem from "./MeetupItem.svelte";
+    import {scale} from 'svelte/transition';
 
     export let meetups;
 </script>
@@ -21,16 +22,18 @@
 
 <section>
     {#each meetups as meetup}
-        <MeetupItem
-                id={meetup.id}
-                title={meetup.title}
-                subtitle={meetup.subtitle}
-                description={meetup.description}
-                imageUrl={meetup.imageUrl}
-                contactEmail={meetup.contactEmail}
-                address={meetup.address}
-                isFavorite={meetup.isFavorite}
-                on:showdetails
-        />
+        <div transition:scale>
+            <MeetupItem
+                    id={meetup.id}
+                    title={meetup.title}
+                    subtitle={meetup.subtitle}
+                    description={meetup.description}
+                    imageUrl={meetup.imageUrl}
+                    contactEmail={meetup.contactEmail}
+                    address={meetup.address}
+                    isFavorite={meetup.isFavorite}
+                    on:showdetails
+            />
+        </div>
     {/each}
 </section>
