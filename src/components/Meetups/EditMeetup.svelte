@@ -3,20 +3,14 @@
     import TextInput from "../UI/TextInput.svelte";
     import Button from "../UI/Button.svelte";
     import Modal from "../UI/Modal.svelte";
-    import {isEmpty, isValidEmail} from '../helpers/validation'
+    import {isEmpty, isValidEmail} from "../helpers/validation";
 
     let title = "";
-    let titleValid = false;
     let subtitle = "";
-    let subtitleValid = false;
     let address = "";
-    let addressValid = false;
     let email = "";
-    let emailValid = false;
     let description = "";
-    let descriptionValid = false
     let imageUrl = "";
-    let imageUrlValid = false;
 
     const dispatch = createEventDispatcher();
 
@@ -26,6 +20,13 @@
     $: descriptionValid = !isEmpty(description);
     $: imageUrlValid = !isEmpty(imageUrl);
     $: emailValid = isValidEmail(email);
+    $: formIsValid =
+        titleValid &&
+        subtitleValid &&
+        addressValid &&
+        descriptionValid &&
+        imageUrlValid &&
+        emailValid;
 
     const submitForm = () => {
         dispatch("save", {
@@ -98,6 +99,6 @@
     </form>
     <div slot="footer">
         <Button type="button" mode="outline" on:click={cancel}>Cancel</Button>
-        <Button type="button" on:click={submitForm}>Save</Button>
+        <Button type="button" on:click={submitForm} disabled={!formIsValid}>Save</Button>
     </div>
 </Modal>
