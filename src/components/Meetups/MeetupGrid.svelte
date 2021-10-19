@@ -33,6 +33,7 @@
                     address={meetup.address}
                     isFavorite={meetup.isFavorite}
                     on:showdetails
+                    on:edit
             />
         </div>
     {/each}

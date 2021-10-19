@@ -1,5 +1,5 @@
 <script>
-    import {createEventDispatcher} from 'svelte';
+    import {createEventDispatcher} from "svelte";
     import meetups from "../../store/meetups-store";
     import Button from "../UI/Button.svelte";
     import Badge from "../UI/Badge.svelte";
@@ -51,13 +51,6 @@
         font-family: "Roboto Slab", sans-serif;
     }
 
-    h1.is-favorite {
-        background: #01a129;
-        color: white;
-        padding: 0 0.5rem;
-        border-radius: 5px;
-    }
-
     h2 {
         font-size: 1rem;
         color: #808080;
@@ -96,7 +89,7 @@
         <p>{description}</p>
     </div>
     <footer>
-        <Button href="mailto{email}">Contact</Button>
+        <Button mode="outline" type="button" on:click={() => dispatch('edit', id)}>Edit</Button>
         <Button
                 type="button"
                 mode="outline"
