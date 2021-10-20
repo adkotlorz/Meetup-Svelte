@@ -11,6 +11,27 @@
     let page = "overview";
     let pageData = {};
 
+    fetch("https://meet-svelte-default-rtdb.europe-west1.firebasedatabase.app/meetups.json")
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Fetch failed");
+            }
+            return res.json();
+        })
+        .then(data => {
+            const loadedMeetups = [];
+            for (const key in data) {
+                loadedMeetups.push({
+                    ...data[key],
+                    id: key,
+                });
+            }
+            meetups.setMeetups(loadedMeetups);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
     const savedMeetup = () => {
         editMode = null;
         editedId = null;

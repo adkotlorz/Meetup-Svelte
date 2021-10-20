@@ -58,7 +58,23 @@
         if (id) {
             meetups.updateMeetup(id, meetupData);
         } else {
-            meetups.addMeetup(meetupData);
+            fetch("https://meet-svelte-default-rtdb.europe-west1.firebasedatabase.app/meetups.json", {
+                method: "POST",
+                body: JSON.stringify({...meetupData, isFavorite: false}),
+                headers: {"Content-Type": "application/json"},
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error("Error occurred, please try again");
+                    }
+                    res.json();
+                })
+                .then(data => {
+                    meetups.addMeetup({...meetupData, isFavorite: false, id: data.name});
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
         dispatch("save");
     };
@@ -66,7 +82,7 @@
     const deleteMeetup = () => {
         meetups.removeMeetup(id);
         dispatch("save");
-    }
+    };
 
     const cancel = () => {
         dispatch("cancel");
@@ -130,6 +146,6 @@
         <Button type="button" on:click={submitForm} disabled={!formIsValid}>Save</Button>
         {#if id}
             <Button type="button" on:click={deleteMeetup}>Delete</Button>
-            {/if}
+        {/if}
     </div>
 </Modal>
