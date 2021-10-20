@@ -3,7 +3,6 @@
     import meetups from "../../store/meetups-store";
     import Button from "../UI/Button.svelte";
     import Badge from "../UI/Badge.svelte";
-    import LoadingSpinner from "../UI/LoadingSpinner.svelte";
 
     export let id;
     export let title;
@@ -11,7 +10,6 @@
     export let imageUrl;
     export let description;
     export let address;
-    export let email = null;
     export let isFavorite;
 
     let isLoading = false;
