@@ -5,6 +5,7 @@
     import EditMeetup from "./components/Meetups/EditMeetup.svelte";
     import MeetupDetail from "./components/Meetups/MeetupDetail.svelte";
     import LoadingSpinner from "./components/UI/LoadingSpinner.svelte";
+    import Error from "./components/UI/Error.svelte";
 
 
     let editMode;
@@ -12,6 +13,7 @@
     let page = "overview";
     let pageData = {};
     let isLoading = true;
+    let error;
 
     fetch("https://meet-svelte-default-rtdb.europe-west1.firebasedatabase.app/meetups.json")
         .then(res => {
@@ -34,6 +36,7 @@
             }, 1000);
         })
         .catch(err => {
+            error = err;
             isLoading = false;
             console.log(err);
         });
@@ -63,6 +66,10 @@
         editedId = e.detail;
     };
 
+    const clearError = () => {
+        error = null;
+    }
+
 </script>
 
 <style>
@@ -73,6 +80,9 @@
 
 <div>
     <Header/>
+    {#if error}
+        <Error message={error.message} on:cancel={clearError}/>
+    {/if}
     <main>
         {#if page === 'overview'}
             {#if editMode === 'edit'}
