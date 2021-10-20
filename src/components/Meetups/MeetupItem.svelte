@@ -98,6 +98,5 @@
             {isFavorite ? 'Unfavored' : 'Favorite'}
         </Button>
         <Button type="button" on:click={() => dispatch('showdetails', id)}>Show details</Button>
-
     </footer>
 </article>

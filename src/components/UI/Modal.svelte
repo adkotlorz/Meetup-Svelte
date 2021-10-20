@@ -60,9 +60,7 @@
 
 </style>
 
-<div transition:fade class="modal-backdrop" on:click={closeModal}>
-
-</div>
+<div transition:fade class="modal-backdrop" on:click={closeModal}></div>
 <div transition:fly={{y: 300}} class="modal">
     <h1>
         {title}
