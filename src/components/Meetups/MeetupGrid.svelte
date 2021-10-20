@@ -1,7 +1,7 @@
 <script>
-    import {createEventDispatcher} from 'svelte';
+    import {createEventDispatcher} from "svelte";
     import {scale} from "svelte/transition";
-    import {flip} from 'svelte/animate';
+    import {flip} from "svelte/animate";
     import MeetupItem from "./MeetupItem.svelte";
     import MeetupFilter from "./MeetupFilter.svelte";
     import Button from "../UI/Button.svelte";
@@ -16,7 +16,7 @@
 
     const setFilter = (e) => {
         favsOnly = e.detail === 1;
-    }
+    };
 </script>
 
 <style>
@@ -33,6 +33,10 @@
         justify-content: space-between;
     }
 
+    .no__meetups {
+        margin: 1rem;
+    }
+
     @media (min-width: 768px) {
         .meetups {
             grid-template-columns: repeat(2, 1fr);
@@ -47,6 +51,9 @@
     </Button>
 </section>
 
+{#if filteredMeetups.length === 0}
+    <p class="no__meetups">No meetups found. Add some!</p>
+{/if}
 <section class="meetups">
     {#each filteredMeetups as meetup (meetup.id)}
         <div transition:scale animate:flip={{duration: 500}}>
