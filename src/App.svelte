@@ -68,7 +68,7 @@
 
     const clearError = () => {
         error = null;
-    }
+    };
 
 </script>
 
